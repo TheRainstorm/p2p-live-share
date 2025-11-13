@@ -1,0 +1,61 @@
+# .github/workflows/package-vsix.yaml
+
+name: 'Build and Package VSIX'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  build-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出代码
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. 设置完整的编译环境 (Node, pnpm, Go)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: 'pnpm' # 为 pnpm 开启缓存，加快后续构建速度
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+          
+      # 3. 安装依赖并执行构建 (与你的 build.yaml 一致)
+      - name: Build Extension
+        run: |
+          pnpm install
+          pnpm build
+
+      - name: Build Go WS Server
+        working-directory: ./src/sync/ws/go
+        run: |
+          chmod +x build.sh
+          ./build.sh
+          
+      # 4. 打包生成 .vsix 文件
+      # 使用 pnpx 调用 @vscode/vsce 的 package 命令
+      # 这会生成 .vsix 文件但不会发布它
+      - name: Package Extension to .vsix file
+        run: pnpx @vscode/vsce package --no-dependencies
+
+      # 5. 上传 .vsix 文件作为工作流产物
+      # 你可以在工作流运行结束后下载这个文件
+      - name: Upload VSIX Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VSIX-Package # 产物的名称
+          path: '*.vsix'     # 使用通配符匹配生成的 .vsix 文件
