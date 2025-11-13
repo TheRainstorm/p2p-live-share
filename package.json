@@ -23,7 +23,7 @@
   "icon": "assets/icon.png",
   "browser": "./dist/browser.js",
   "engines": {
-    "vscode": "^1.99.0"
+    "vscode": "^1.85.0"
   },
   "activationEvents": [
     "onFileSystem:p2p-live-share"
@@ -581,7 +581,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
     "@types/node": "^20",
-    "@types/vscode": "^1.99.0",
+    "@types/vscode": "^1.85.0",
     "@vscode-elements/elements": "^2.3.1",
     "@vscode/test-web": "^0.0.74",
     "@vscode/windows-process-tree": "^0.6.0",
