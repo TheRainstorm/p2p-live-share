@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - vscode_1.85
   pull_request:
   workflow_dispatch: # 允许手动触发
 
@@ -36,8 +37,9 @@ jobs:
           
       # 3. 安装依赖并执行构建 (与你的 build.yaml 一致)
       - name: Build Extension
+        # --no-frozen-lockfile 避免修改 package.json 还需要本地 pnpm install 更新 pnpm-lock.yaml
         run: |
-          pnpm install
+          pnpm install --no-frozen-lockfile
           pnpm build
 
       - name: Build Go WS Server
