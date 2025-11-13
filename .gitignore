@@ -5,3 +5,5 @@ test-workspace
 .eslintcache
 temp
 *.vsix
+.pnpm-store
+
