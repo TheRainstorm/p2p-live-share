@@ -10,7 +10,6 @@ import { useClientRpc } from '../rpc/client'
 import { useClientScm } from '../scm/client'
 import { useConnection } from '../sync/connection'
 import { useDocSync } from '../sync/doc'
-import { useClientTerminals } from '../terminal/client'
 import { useTunnels } from '../tunnel'
 import { useUsers } from '../ui/users'
 import { useWebview } from '../ui/webview/webview'
@@ -72,7 +71,6 @@ export async function createClientSession(config: ConnectionConfig) {
 
     const rpc = useClientRpc(connection, hostId)
     useClientFs(doc, rpc)
-    const { shadowTerminals } = useClientTerminals(doc, rpc)
     useClientLs(connection, hostId)
     useClientDiagnostics(doc)
     useClientScm(doc, rpc)
@@ -98,7 +96,6 @@ export async function createClientSession(config: ConnectionConfig) {
       connection,
       doc,
       scope,
-      shadowTerminals,
       tunnels,
     }
   })!

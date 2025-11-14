@@ -183,12 +183,6 @@
           "when": "p2p-live-share:inSession"
         },
         {
-          "id": "p2p-live-share.terminals",
-          "name": "Terminals",
-          "type": "tree",
-          "when": "p2p-live-share:inSession"
-        },
-        {
           "id": "p2p-live-share.tunnels",
           "name": "Shared Servers",
           "type": "tree",
@@ -219,11 +213,6 @@
           "group": "navigation"
         },
         {
-          "command": "p2p-live-share.createSharedTerminal",
-          "when": "view == p2p-live-share.terminals",
-          "group": "navigation"
-        },
-        {
           "command": "p2p-live-share.shareServer",
           "when": "view == p2p-live-share.tunnels",
           "group": "navigation"
@@ -238,11 +227,6 @@
         {
           "command": "p2p-live-share.unfollowParticipant",
           "when": "view == p2p-live-share.participants && viewItem == following",
-          "group": "inline"
-        },
-        {
-          "command": "p2p-live-share.closeSharedTerminal",
-          "when": "view == p2p-live-share.terminals",
           "group": "inline"
         },
         {
@@ -440,11 +424,6 @@
         "when": "p2p-live-share:inSession"
       },
       {
-        "view": "p2p-live-share.terminals",
-        "contents": "A shared terminal allows all participants to see the terminal output and input commands. \n[Create Terminal](command:p2p-live-share.createSharedTerminal)",
-        "when": "p2p-live-share:inSession"
-      },
-      {
         "view": "p2p-live-share.tunnels",
         "contents": "Share a local server with all participants. \n[Share Server](command:p2p-live-share.shareServer)",
         "when": "p2p-live-share:inSession && p2p-live-share:supportsTunnels"
@@ -470,17 +449,6 @@
           "type": "object",
           "default": {},
           "description": "The first parameter of trystero.joinRoom, see https://github.com/dmotz/trystero."
-        },
-        "p2p-live-share.terminal.dimensionsSource": {
-          "type": "string",
-          "enum": [
-            "host",
-            "creator",
-            "minimum",
-            "maximum"
-          ],
-          "default": "minimum",
-          "description": "Determines how terminal dimensions are calculated for shared terminals."
         }
       }
     },
@@ -593,7 +561,6 @@
     "get-port": "^7.1.0",
     "lib0": "^0.2.114",
     "nanoid": "^5.1.6",
-    "node-pty": "^1.1.0-beta35",
     "pathe": "^2.0.3",
     "reactive-vscode": "^0.4.1",
     "trystero": "^0.22.0",

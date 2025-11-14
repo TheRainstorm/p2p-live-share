@@ -224,7 +224,6 @@ export const useActiveSession = createSingletonComposable(() => {
     hostMeta: computed(() => session.value?.hostMeta),
     peers: computed(() => session.value?.connection.peers.value),
     connection: computed(() => session.value?.connection),
-    shadowTerminals: computed(() => session.value?.shadowTerminals),
     tunnels: computed(() => session.value?.tunnels),
     isJoining,
     makeTrackUri,

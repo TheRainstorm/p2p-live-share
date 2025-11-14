@@ -10,7 +10,6 @@ import { useHostRpc } from '../rpc/host'
 import { useHostScm } from '../scm/host'
 import { useConnection } from '../sync/connection'
 import { useDocSync } from '../sync/doc'
-import { useHostTerminals } from '../terminal/host'
 import { useTunnels } from '../tunnel'
 import { useUsers } from '../ui/users'
 import { useWebview } from '../ui/webview/webview'
@@ -40,11 +39,9 @@ export async function createHostSession(config: ConnectionConfig) {
     }, { immediate: true })
 
     const fs = useHostFs(connection, doc)
-    const terminals = useHostTerminals(doc)
     const scm = useHostScm(connection, doc)
     useHostRpc(connection, {
       ...fs,
-      ...terminals,
       ...scm,
     })
     useHostLs(connection)
@@ -60,7 +57,6 @@ export async function createHostSession(config: ConnectionConfig) {
       connection,
       doc,
       scope,
-      shadowTerminals: terminals.shadowTerminals,
       tunnels,
     }
   })!
