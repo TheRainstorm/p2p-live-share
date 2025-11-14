@@ -4,7 +4,7 @@ import type * as Y from 'yjs'
 import type { TrackedDiagnostics } from './common'
 import { onScopeDispose } from 'reactive-vscode'
 import { languages, Uri } from 'vscode'
-import { createConverter } from 'vscode-languageclient/$test/common/protocolConverter'
+import { createConverter } from 'vscode-languageclient/lib/common/protocolConverter'
 import { useObserverDeep } from '../sync/doc'
 
 export function useClientDiagnostics(doc: Y.Doc) {

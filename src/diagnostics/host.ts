@@ -3,7 +3,7 @@ import type { Connection } from '../sync/connection'
 import type { TrackedDiagnostics } from './common'
 import { useDisposable } from 'reactive-vscode'
 import { languages } from 'vscode'
-import { createConverter } from 'vscode-languageclient/$test/common/codeConverter'
+import { createConverter } from 'vscode-languageclient/lib/common/codeConverter'
 import * as Y from 'yjs'
 
 export function useHostDiagnostics(connection: Connection, doc: Y.Doc) {
